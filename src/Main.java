@@ -1,8 +1,8 @@
 import Location.Location;
 import Location.Forest;
 import Location.Town;
+import Character.Player;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Scanner;
 
@@ -11,6 +11,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         System.out.println("Welcome to the game!");
+        Player player = new Player();
 
         Map<String, Location> locationList = new HashMap<>(); //hashmap instead of arraylist coz easy to track of locations
         locationList.put("t", new Town());
@@ -21,14 +22,19 @@ public class Main {
         while (true) {
             currentLocation.showDescription();
             Scanner input = new Scanner(System.in);
-            System.out.println("Would you like to go somewhere else?");
             currentLocation.showNavigation();
 
             String userInputLocation = input.nextLine();
 
+
             if (userInputLocation.equalsIgnoreCase("f")) {
                 currentLocation = locationList.get(userInputLocation);
                 System.out.println("Let's go to the forest");
+            }else if (userInputLocation.equalsIgnoreCase("c")) {
+                System.out.println("Let's fight!!!");
+                Combat combat = new Combat(player);
+                combat.executeCombat();
+
             }else if (userInputLocation.equalsIgnoreCase("t")){
                 currentLocation = locationList.get(userInputLocation);
                 System.out.println("Let's go to the town");
