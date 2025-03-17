@@ -1,6 +1,5 @@
 import java.util.Random;
 import java.util.Scanner;
-
 import Character.Player;
 import Character.Enemy;
 import Character.Monster;
@@ -12,14 +11,14 @@ public class Combat {
     Enemy enemy;
 
     public Combat(Player player){
-        //TODO: don't create player here, instead receive it as an argument
+        //receive player as an argument
         this.player = player;
         this.enemy = new Monster(this.player.getLevel());
     }
 
-
-
     public void executeCombat(){
+        player.showStat();
+        enemy.showStat();
         //while monster and user hp > 0
         while ((this.player.getHp() > 0) && (this.enemy.getHp() > 0)) {
             Scanner input = new Scanner(System.in);
@@ -43,11 +42,13 @@ public class Combat {
 
         if (this.player.getHp() > 0){
             System.out.println("Good job! You defeated the monster!");
+            this.player.setLevel(this.player.getLevel()+1);
+            player.showStat();
+
         } else {
             System.out.println("Ops, you are DEAD");
             System.exit(0);
         }
-
     }
 
     private void attack(Combatant attacker, Combatant defender){
@@ -70,15 +71,4 @@ public class Combat {
         Random rand = new Random();
         return rand.nextBoolean();
     }
-
-
-
-    //actions
-        //attack with weapon
-        //attack with spell
-        //runaway (not guranteed)
-        //use item
-    //after kill the monster take gold (loot)
-    //if user's hp is below zero, return to town & lose some gold and ex
-
 }

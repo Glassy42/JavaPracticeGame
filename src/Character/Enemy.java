@@ -14,19 +14,10 @@ public class Enemy extends Combatant {
     }
 
     public void showStat() {
-        System.out.println("===== Character.Monster's Stat =====");
+        System.out.println("===== Monster's Stat =====");
         System.out.println("Level: " + this.level);
         System.out.println("HP: " + this.hp);
         System.out.println("Attack Level: " + this.atk);
         System.out.println("Defence Level: " + this.def);
     }
 }
-
-
-//
-//class Boss extends Character.Enemy {
-//    //level
-//    //xp
-//    //atk
-//    //def
-//}-

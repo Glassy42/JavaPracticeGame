@@ -10,7 +10,6 @@ public class Player extends Combatant {
         this.def = 1;
         this.hp = 10;
         this.level = 1;
-        this.name = "Character.Player";
 
         Scanner input = new Scanner(System.in);
 
@@ -21,17 +20,27 @@ public class Player extends Combatant {
 
         String userInputRace = input.nextLine();
 
+        System.out.println("What's your character's name?");
+
+        this.name = input.nextLine();
+
         if (userInputRace.equalsIgnoreCase("E")){
-            System.out.println("You chose Elf, you have high attack level!");
+            System.out.println("Hi, "+ this.name + "!" + " You chose Elf, you have high attack level!");
             this.atk += 2;
         } else if (userInputRace.equalsIgnoreCase("D")) {
-            System.out.println("You chose Dwarf, you have high defence level!");
+            System.out.println("Hi, "+ this.name + "!" + " You chose Dwarf, you have high defence level!");
             this.def += 2;
         } else {
-            System.out.println("You chose Human, you have high defence level!");
+            System.out.println("Hi, "+ this.name + "!" + " You chose Human, you have high defence level!");
             this.hp += 20;
         }
-
     }
 
+    public void showStat(){
+        System.out.println("===== " + this.name + "'s Stat =====");
+        System.out.println("Level: "+ getLevel());
+        System.out.println("Hp: "+ getHp());
+        System.out.println("Attack level: "+ getAtk());
+        System.out.println("Defence level: "+ getDef());
+    }
 }
