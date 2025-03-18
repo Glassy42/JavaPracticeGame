@@ -46,4 +46,12 @@ public class Combatant {
     public void setName(String name) {
         this.name = name;
     }
+
+    public void showStat(){
+        System.out.println("===== " + name + "'s Stat =====");
+        System.out.println("Level: " + level);
+        System.out.println("Hp: " + hp);
+        System.out.println("Attack level: " + atk);
+        System.out.println("Defence level: " + def);
+    }
 }

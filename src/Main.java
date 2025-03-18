@@ -11,7 +11,7 @@ public class Main {
         System.out.println("Welcome to the game!");
         Player player = new Player();
 
-        Map<String, Location> locationList = new HashMap<>(); //hashmap instead of arraylist because easy to track of locations
+        Map<String, Location> locationList = new HashMap<>(); //hashmap instead of arraylist - easy to track of locations
         locationList.put("t", new Town());
         locationList.put("f", new Forest());
 
@@ -21,6 +21,7 @@ public class Main {
             currentLocation.showDescription();
             Scanner input = new Scanner(System.in);
             currentLocation.showNavigation();
+            currentLocation.showVisual();
 
             String userInputLocation = input.nextLine();
 
@@ -30,8 +31,8 @@ public class Main {
             }else if (userInputLocation.equalsIgnoreCase("c")) {
                 System.out.println("You are in combat mode!");
                 Combat combat = new Combat(player);
+                combat.showVisual();
                 combat.executeCombat();
-
             }else if (userInputLocation.equalsIgnoreCase("t")){
                 currentLocation = locationList.get(userInputLocation);
                 System.out.println("Let's go to the town");

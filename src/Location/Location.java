@@ -7,5 +7,7 @@ public abstract class Location {
         System.out.println(this.description);
     }
 
-    public abstract void showNavigation();
+    public abstract void showNavigation(); //abstract: this function does not have body -> forcing subclass to implement this function
+
+    public abstract void showVisual();
 }
