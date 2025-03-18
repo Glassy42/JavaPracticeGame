@@ -9,19 +9,19 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         System.out.println("Welcome to the game!");
-        Player player = new Player();
+        Player player = new Player(); //create new character to play
 
         Map<String, Location> locationList = new HashMap<>(); //hashmap instead of arraylist - easy to track of locations
-        locationList.put("t", new Town());
-        locationList.put("f", new Forest());
+        locationList.put("t", new Town()); //set t as town
+        locationList.put("f", new Forest()); //set f as forest
 
-        Location currentLocation = locationList.get("t");
+        Location currentLocation = locationList.get("t"); //start location set to town
 
         while (true) {
-            currentLocation.showDescription();
+            currentLocation.showDescription(); //display location description everytime
+            currentLocation.showNavigation(); //ask user where they want to go
             Scanner input = new Scanner(System.in);
-            currentLocation.showNavigation();
-            currentLocation.showVisual();
+            currentLocation.showVisual(); //display visual
 
             String userInputLocation = input.nextLine();
 

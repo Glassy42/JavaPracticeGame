@@ -16,6 +16,7 @@ public class Combat {
         this.enemy = new Monster(this.player.getLevel());
     }
 
+    //doesn't make sense combat goes into location but.. the same method needs here
     //interface could be good for this
     public void showVisual(){
         System.out.println("            _.------.                        .----.__\n" +
@@ -35,8 +36,11 @@ public class Combat {
     }
 
     public void executeCombat(){
+        //shows stat in the beginning of the combat
         player.showStat();
         enemy.showStat();
+
+        Random random = new Random();
         //while monster and user hp > 0
         while ((this.player.getHp() > 0) && (this.enemy.getHp() > 0)) {
             Scanner input = new Scanner(System.in);
@@ -45,12 +49,12 @@ public class Combat {
             System.out.println("(R)un away");
             String userInputAction = input.nextLine();
 
-            // Player attacks first!
+            // Player attacks first
             if (userInputAction.equalsIgnoreCase("A")) {
-                this.attack(this.player, this.enemy);
+                this.attack(this.player, this.enemy, random);
             } else {
-                boolean runOrHit = getRandomBoolean();
-                if (runOrHit){
+                boolean runAwaySuccess = random.nextBoolean();
+                if (runAwaySuccess){
                     break;
                 } else {
                     System.out.println("Ops, there is no way out.. face the monster!");
@@ -58,14 +62,13 @@ public class Combat {
             }
             //Now it's the monsters turn
             if (this.enemy.getHp() > 0) {
-                this.attack(this.enemy, this.player);
+                this.attack(this.enemy, this.player, random);
             }
         }
 
         if (this.player.getHp() > 0 && this.enemy.getHp() <= 0){
             System.out.println("Good job! You defeated the monster!");
-            this.player.setLevel(this.player.getLevel()+1); //or get xp
-
+            this.player.setLevel(this.player.getLevel()+1); //or get xp?
         } else if (this.player.getHp() <= 0) {
             System.out.println("Ops, you are DEAD");
             System.exit(0);
@@ -74,12 +77,10 @@ public class Combat {
         }
     }
 
-    private void attack(Combatant attacker, Combatant defender){
-        Random rand = new Random();
-
-        int attackRoll = rand.nextInt(6) + attacker.getAtk();
-        int defendRoll = rand.nextInt(6) + defender.getDef();
-        int dmg = attackRoll - defendRoll;
+    private void attack(Combatant attacker, Combatant defender, Random rand){
+        int attackRoll = rand.nextInt(6) + attacker.getAtk(); //get random number and add attacker's attack level
+        int defendRoll = rand.nextInt(6) + defender.getDef(); //defender also get random number + defend level
+        int dmg = attackRoll - defendRoll; //actual damage is attack number - defend number after the calculation
 
         if (dmg <= 0) {
             System.out.println("Oops, " + attacker.getName() + " missed!");
@@ -88,10 +89,5 @@ public class Combat {
             defender.setHp(defender.getHp() - dmg);
             System.out.println(defender.getName() + "'s hp is: " + defender.getHp());
         }
-    }
-
-    public static boolean getRandomBoolean(){
-        Random rand = new Random();
-        return rand.nextBoolean();
     }
 }
